@@ -52,7 +52,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
         child: Column(
           children: [
 
-            // 🔥 ADD FIELD
+            // ADD FIELD
             Row(
               children: [
                 Expanded(
@@ -73,7 +73,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
 
             const SizedBox(height: 20),
 
-            // 🔥 LIST
+            // LIST
             Expanded(
               child: ListView.builder(
                 itemCount: methods.length,

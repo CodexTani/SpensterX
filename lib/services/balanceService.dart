@@ -29,7 +29,7 @@ class BalanceService {
     saveBalances();
   }
 
-  // 🔥 FINAL SAFE RECALCULATION
+  //FINAL SAFE RECALCULATION
   static void recalculateBalances(List<Transaction> transactions) {
     // reset safely
     currentBalances = {};

@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
       case 1:
         return const HistoryScreen();
       case 3:
-        return const AccountScreen(); // ✅ FIXED (was 4 ❌)
+        return const AccountScreen(); 
       default:
         return const HomeScreen();
     }
@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void onItemTapped(int index) {
     if (index == 2) {
-      // 🔥 OPEN ADD SCREEN (DO NOT CHANGE TAB)
+      // OPEN ADD SCREEN 
       Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => const AddExpenseScreen()),
@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
         height: 70,
         child: BottomNavigationBar(
           currentIndex: selectedIndex,
-          onTap: onItemTapped, // ✅ FIXED
+          onTap: onItemTapped, 
 
           type: BottomNavigationBarType.fixed,
           backgroundColor: const Color(0xFF1A1A2E),

@@ -65,7 +65,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           IconButton(
             icon: const Icon(Icons.bar_chart),
 
-            // 🔥 FULL SCREEN INSIGHTS
+            // FULL SCREEN INSIGHTS
             onPressed: () {
               Navigator.push(
                 context,
@@ -83,7 +83,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       body: Column(
         children: [
 
-          // FILTER UI (UNCHANGED)
+         
           Padding(
             padding: const EdgeInsets.all(12),
             child: Row(
@@ -150,7 +150,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
           ),
 
-          // LIST (UNCHANGED)
+          // LIST
           Expanded(
             child: transactions.isEmpty
                 ? const Center(
@@ -212,7 +212,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     child: Row(
       children: [
 
-        // 🔥 ICON BOX
+        //ICON BOX
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -224,7 +224,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
         const SizedBox(width: 12),
 
-        // 🔥 TEXT SECTION
+        //TEXT SECTION
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -262,7 +262,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
         ),
 
-        // 🔥 AMOUNT
+        //AMOUNT
         Text(
           "${isIncome ? '+' : '-'} ₹${t.amount.toInt()}",
           style: TextStyle(
@@ -277,9 +277,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
 }
 }
 
-////////////////////////////////////////////////////////////
-/// 🔥 NEW SCREEN (INSIGHTS — EXACT LIKE YOUR IMAGE 3)
-////////////////////////////////////////////////////////////
+
+///
+
 
 class InsightsScreen extends StatefulWidget {
   final List<Transaction> transactions;
@@ -334,7 +334,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
         child: Column(
           children: [
 
-            // 🔥 START / END DATE (ADDED — EXACTLY WHAT YOU WANT)
+            // START / END DATE 
             Row(
               children: [
 
@@ -400,7 +400,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
 
             const SizedBox(height: 20),
           
-            // 🔥 CHART
+            // CHART
             SizedBox(
               height: 250,
               child: data.isEmpty
@@ -428,7 +428,7 @@ PieChart(
 
             const SizedBox(height: 20),
 
-            // 🔥 LIST
+            // LIST
             Expanded(
               child: ListView(
                 children: data.entries.map((e) {
@@ -443,7 +443,7 @@ PieChart(
               ),
             ),
 
-            // 🔥 PDF BUTTON
+            // PDF BUTTON
             ElevatedButton(
               onPressed: () {},
               child: const Text("Download PDF"),

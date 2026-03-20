@@ -8,7 +8,7 @@ import '../models/transaction.dart';
 
 class BackupService {
 
-  // 🔥 EXPORT
+  // EXPORT
   static Future<String> exportData() async {
 
     final data = {
@@ -27,7 +27,7 @@ class BackupService {
     return file.path;
   }
 
-  // 🔥 IMPORT
+  // IMPORT
   static Future<void> importData() async {
 
     final dir = await getApplicationDocumentsDirectory();
@@ -38,7 +38,7 @@ class BackupService {
     final jsonString = await file.readAsString();
     final data = jsonDecode(jsonString);
 
-    // 🔥 Restore transactions
+    //Restore transactions
     final transactions = data["transactions"] as List;
     TransactionService.transactions = transactions
         .map((t) => Transaction.fromMap(t))
@@ -46,11 +46,11 @@ class BackupService {
 
     TransactionService.saveTransactions();
 
-    // 🔥 Restore balances
+    //  Restore balances
     final balances = Map<String, double>.from(data["balances"]);
     BalanceService.setInitialBalances(balances);
 
-    // 🔥 Restore payment methods
+    // Restore payment methods
     final methods = List<String>.from(data["paymentMethods"]);
     StorageService.savePaymentMethods(methods);
   }

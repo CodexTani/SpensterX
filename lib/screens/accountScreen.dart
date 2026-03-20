@@ -28,7 +28,7 @@ class _AccountScreenState extends State<AccountScreen> {
             children: [
               const SizedBox(height: 20),
 
-              // 🔥 GREETING (placeholder for now)
+              //GREETING
               Text(
                 "Hello, $name 👋",
                 style: const TextStyle(
@@ -40,7 +40,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
               const SizedBox(height: 30),
 
-              // 🔥 SETTINGS CARDS
+              //SETTINGS CARDS
               settingCard(
                 title: "Manage Balances",
                 icon: Icons.account_balance_wallet,
@@ -101,7 +101,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     ),
                   );
 
-                  setState(() {}); // 🔥 refresh UI
+                  setState(() {}); // refresh UI
                 },
               ),
             ],

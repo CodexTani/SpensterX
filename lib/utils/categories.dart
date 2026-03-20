@@ -46,7 +46,6 @@ const List<CategoryData> categoryDataList = [
 
 ];
 
-// keep this for old dropdowns
 const List<String> categories = [
   "Food",
   "Study",

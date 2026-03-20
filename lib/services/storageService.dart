@@ -9,7 +9,7 @@ class StorageService {
     box = await Hive.openBox("expenseBox");
   }
 
-  // 🔥 NEW: Get monthly limit
+  // Get monthly limit
   static double getMonthlyLimit(DateTime date) {
     final key = "monthlyLimit_${date.year}_${date.month}";
     final value = box.get(key);
@@ -21,13 +21,13 @@ class StorageService {
     return value;
   }
 
-  // 🔥 NEW: Set monthly limit
+  // Set monthly limit
   static void setMonthlyLimit(DateTime date, double amount) {
     final key = "monthlyLimit_${date.year}_${date.month}";
     box.put(key, amount);
   }
 
-  // 🔥 PAYMENT METHODS STORAGE
+  //PAYMENT METHODS STORAGE
 
 static List<String> getPaymentMethods() {
   final methods = box.get("paymentMethods");

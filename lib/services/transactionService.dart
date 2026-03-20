@@ -24,7 +24,7 @@ class TransactionService {
     BalanceService.recalculateBalances(transactions);
   }
 
-  // SAVE (SAFE)
+  // SAVE 
   static void saveTransactions() {
     try {
       final data = transactions.map((t) => t.toMap()).toList();

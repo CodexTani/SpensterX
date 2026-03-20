@@ -11,7 +11,6 @@ class DateSummaryScreen extends StatefulWidget {
 }
 
 class _DateSummaryScreenState extends State<DateSummaryScreen> {
-
   DateTime? startDate;
   DateTime? endDate;
 
@@ -19,35 +18,28 @@ class _DateSummaryScreenState extends State<DateSummaryScreen> {
   Map<String, double> categoryTotals = {};
 
   void calculateSummary() {
+    if (startDate == null || endDate == null) return;
 
-  if (startDate == null || endDate == null) return;
+    double sum = 0;
+    Map<String, double> map = {};
 
-  double sum = 0;
-  Map<String, double> map = {};
+    for (Transaction t in TransactionService.transactions) {
+      if (!t.isIncome &&
+          t.date.isAfter(startDate!.subtract(const Duration(days: 1))) &&
+          t.date.isBefore(endDate!.add(const Duration(days: 1)))) {
+        sum += t.amount;
 
-  for (Transaction t in TransactionService.transactions) {
-
-    if (!t.isIncome &&
-        t.date.isAfter(startDate!.subtract(const Duration(days: 1))) &&
-        t.date.isBefore(endDate!.add(const Duration(days: 1)))) {
-
-      sum += t.amount;
-
-      map[t.category] = (map[t.category] ?? 0) + t.amount;
-
+        map[t.category] = (map[t.category] ?? 0) + t.amount;
+      }
     }
 
+    setState(() {
+      total = sum;
+      categoryTotals = map;
+    });
   }
 
-  setState(() {
-    total = sum;
-    categoryTotals = map;
-  });
-
-}
-
   Future pickStart() async {
-
     final date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -60,11 +52,9 @@ class _DateSummaryScreenState extends State<DateSummaryScreen> {
         startDate = date;
       });
     }
-
   }
 
   Future pickEnd() async {
-
     final date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -77,111 +67,90 @@ class _DateSummaryScreenState extends State<DateSummaryScreen> {
         endDate = date;
       });
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
-      appBar: AppBar(
-        title: const Text("Date Summary"),
-      ),
+      appBar: AppBar(title: const Text("Date Summary")),
 
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
-        child: Column(
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: pickStart,
+                child: const Text("Select Start Date"),
+              ),
 
-          children: [
+              ElevatedButton(
+                onPressed: pickEnd,
+                child: const Text("Select End Date"),
+              ),
 
-            ElevatedButton(
-              onPressed: pickStart,
-              child: const Text("Select Start Date"),
-            ),
+              const SizedBox(height: 20),
 
-            ElevatedButton(
-              onPressed: pickEnd,
-              child: const Text("Select End Date"),
-            ),
+              ElevatedButton(
+                onPressed: calculateSummary,
+                child: const Text("Generate Summary"),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  if (startDate != null && endDate != null) {
+                    PdfService.generateSummaryPDF(
+                      total,
+                      categoryTotals,
+                      startDate!,
+                      endDate!,
+                    );
+                  }
+                },
+                child: const Text("Export PDF"),
+              ),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 30),
 
-            ElevatedButton(
-              onPressed: calculateSummary,
-              child: const Text("Generate Summary"),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-  onPressed: () {
+              Text(
+                "Total Spending: ₹${total.toInt()}",
+                style: const TextStyle(fontSize: 22),
+              ),
 
-    if (startDate != null && endDate != null) {
+              const SizedBox(height: 20),
 
-      PdfService.generateSummaryPDF(
-        total,
-        categoryTotals,
-        startDate!,
-        endDate!,
-      );
+              ...categoryTotals.entries.map((entry) {
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
 
-    }
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(entry.key),
 
-  },
-  child: const Text("Export PDF"),
-),
-
-            const SizedBox(height: 30),
-
-            Text(
-              "Total Spending: ₹${total.toInt()}",
-              style: const TextStyle(fontSize: 22),
-            ),
-
-            const SizedBox(height: 20),
-
-...categoryTotals.entries.map((entry) {
-
-  return Container(
-    margin: const EdgeInsets.only(bottom: 8),
-    padding: const EdgeInsets.all(12),
-    decoration: BoxDecoration(
-     borderRadius: BorderRadius.circular(16),
-boxShadow: [
-  BoxShadow(
-    color: Colors.black.withOpacity(0.25),
-    blurRadius: 10,
-    offset: const Offset(0, 5),
-  ),
-],),
-
-
-
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-
-        Text(entry.key),
-
-        Text(
-          "₹${entry.value.toInt()}",
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        )
-
-      ],
-    ),
-  );
-
-}),
-
-          ],
-
+                      Text(
+                        "₹${entry.value.toInt()}",
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ],
+          ),
         ),
-        )
       ),
-
     );
-
   }
-
 }

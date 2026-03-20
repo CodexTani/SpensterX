@@ -23,7 +23,6 @@ class _SetupBalancesScreenState extends State<SetupBalancesScreen> {
   void loadMethods() {
     final fetched = StorageService.getPaymentMethods();
 
-    // 🔥 SAFETY: ensure list is never null
     methods = fetched.isNotEmpty ? fetched : [];
 
     for (var method in methods) {
@@ -49,7 +48,7 @@ class _SetupBalancesScreenState extends State<SetupBalancesScreen> {
   @override
   Widget build(BuildContext context) {
 
-    // 🔥 EXTRA SAFETY (prevents map crash)
+
     if (methods.isEmpty) {
       loadMethods();
     }
