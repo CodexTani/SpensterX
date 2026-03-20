@@ -46,3 +46,12 @@ git clone https://github.com/CodexTani/SpendsterX.git
 cd SpendsterX
 flutter pub get
 flutter run
+```
+## Future Improvements
+-Cloud sync
+-Notifications and reminders
+-Budget prediction features
+
+## Author
+
+Tanishq Bajoria
