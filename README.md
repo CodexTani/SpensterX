@@ -1,17 +1,48 @@
-# expense_app
+# SpendsterX — Smart Expense Tracker
 
-A new Flutter project.
+SpendsterX is a modern Flutter-based expense tracking app built to help users manage their finances with a clean UI, dynamic payment methods, useful analytics, and offline backup support.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+### Dashboard
+- Today's spending overview
+- Monthly progress tracking
+- Daily safe spending calculation
+- Smart status indicator (On Track / Careful / Overspent)
 
-A few resources to get you started if this is your first Flutter project:
+### Transactions
+- Add income and expenses
+- Edit and delete transactions
+- Filter by date range
+- Monthly default view
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### Payment Methods
+- Fully customizable payment methods
+- Dynamic user-defined methods
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Balance Management
+- Separate balance tracking for each payment method
+- Real-time balance updates
+
+### History & Insights
+- Transaction history
+- Category-wise spending insights
+- Weekly spending trends
+
+### Backup System
+- Manual export and import of data
+- JSON-based local backup
+- Offline support
+
+## Tech Stack
+- Flutter
+- Hive
+- fl_chart
+
+## Installation
+
+```bash
+git clone https://github.com/CodexTani/SpendsterX.git
+cd SpendsterX
+flutter pub get
+flutter run
